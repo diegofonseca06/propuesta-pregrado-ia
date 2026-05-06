@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análisis de Viabilidad: Pregrado en Ingeniería en Inteligencia Artificial</title>
+    <title>Propuesta Académica: Ingeniería en Inteligencia Artificial - EAFIT</title>
     
     <!-- Fuentes estilo New York Times -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -19,6 +19,10 @@
             --white: #FFFFFF;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -31,30 +35,14 @@
             font-family: 'Lora', serif;
             line-height: 1.7;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
-        /* Contenedor Principal */
-        .container {
-            max-width: 950px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        /* Animaciones de entrada y salida */
-        .section-container {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 80px 0;
-        }
-
+        /* Dinamismo Bidireccional (Aparecer y Desaparecer) */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                        transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            will-change: opacity, transform;
         }
 
         .reveal.active {
@@ -62,22 +50,29 @@
             transform: translateY(0);
         }
 
-        .reveal.fade-up {
-            opacity: 0;
-            transform: translateY(-40px);
+        /* Contenedor Principal */
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        /* Tipografía y Encabezados */
+        /* Encabezado */
         header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            border-bottom: 1px solid #EAEAEA;
+            position: relative;
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
             font-size: 3.8rem;
             color: var(--primary-dark);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             font-weight: 700;
             line-height: 1.1;
         }
@@ -87,8 +82,15 @@
             font-size: 1.1rem;
             color: var(--muted-purple);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        /* Secciones */
+        section {
+            padding: 120px 0;
+            min-height: 80vh;
+            position: relative;
         }
 
         h2 {
@@ -101,7 +103,7 @@
         }
 
         p {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             margin-bottom: 1.8rem;
             text-align: justify;
         }
@@ -111,39 +113,53 @@
             font-weight: 700;
         }
 
-        /* Tooltips Inteligentes */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            border-bottom: 1px dashed var(--vibrant-blue);
-            color: var(--vibrant-blue);
-            cursor: pointer;
-            font-weight: 600;
+        .synthesis {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--accent-blue);
+            border-left: 2px solid var(--muted-purple);
+            padding-left: 20px;
+            margin: 40px 0;
         }
 
-        .tooltip .tooltip-text {
+        /* Tooltips Inteligentes */
+        .tooltip-trigger {
+            border-bottom: 1px dashed var(--vibrant-blue);
+            color: var(--vibrant-blue);
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip-trigger .tooltip-text {
             visibility: hidden;
-            width: 320px;
+            width: 300px;
             background-color: var(--primary-dark);
             color: var(--white);
             text-align: left;
             border-radius: 6px;
-            padding: 15px;
-            position: absolute;
-            z-index: 100;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
+            padding: 12px 15px;
             font-family: 'Inter', sans-serif;
             font-size: 0.95rem;
+            font-style: normal;
             font-weight: 400;
             line-height: 1.5;
-            box-shadow: 0px 10px 20px rgba(0,0,0,0.15);
+            
+            /* Posicionamiento */
+            position: absolute;
+            z-index: 10;
+            bottom: 130%;
+            left: 50%;
+            margin-left: -150px;
+            
+            /* Animación */
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateY(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        .tooltip .tooltip-text::after {
+        .tooltip-trigger .tooltip-text::after {
             content: "";
             position: absolute;
             top: 100%;
@@ -154,267 +170,277 @@
             border-color: var(--primary-dark) transparent transparent transparent;
         }
 
-        .tooltip:hover .tooltip-text {
+        .tooltip-trigger:hover .tooltip-text {
             visibility: visible;
             opacity: 1;
+            transform: translateY(0);
         }
 
-        /* Tablas Comparativas Detailadas */
+        /* Tablas Completas Integradas */
+        .visualization {
+            margin: 60px 0;
+            overflow-x: auto;
+        }
+
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 40px 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
         }
 
         .comparison-table th {
             text-align: left;
             padding: 20px;
-            background-color: var(--light-bg);
-            color: var(--accent-blue);
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            border-top: 2px solid var(--primary-dark);
             border-bottom: 2px solid var(--primary-dark);
+            color: var(--primary-dark);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            width: 33%;
         }
 
         .comparison-table td {
             padding: 20px;
-            border-bottom: 1px solid #EAEAEA;
+            border-bottom: 1px solid #e0e0e0;
             vertical-align: top;
-            font-size: 1.05rem;
-            line-height: 1.6;
+            color: var(--text-black);
         }
 
-        .comparison-table tr:hover {
-            background-color: #FAFCFF;
+        .comparison-table tr:hover td {
+            background-color: var(--light-bg);
+            transition: background-color 0.3s ease;
         }
 
-        /* Navegación por flechas */
-        .scroll-nav {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 1000;
+        .feature-label {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: var(--muted-purple);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
         }
 
-        .scroll-nav button {
-            background: transparent;
-            border: 1px solid var(--muted-purple);
-            color: var(--primary-dark);
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0.6;
+        /* Flechas de Navegación */
+        .nav-arrow {
+            display: block;
+            width: 40px;
+            height: 40px;
+            margin: 40px auto 0 auto;
+            text-align: center;
+            text-decoration: none;
+            color: var(--muted-purple);
+            font-size: 2rem;
+            transition: color 0.3s, transform 0.3s;
         }
 
-        .scroll-nav button:hover {
-            opacity: 1;
-            background: var(--light-bg);
-            border-color: var(--vibrant-blue);
+        .nav-arrow:hover {
             color: var(--vibrant-blue);
-            transform: scale(1.1);
+            transform: translateY(5px);
         }
 
         /* Footer */
         footer {
             background-color: var(--light-bg);
             padding: 80px 0;
+            margin-top: 50px;
             text-align: center;
-            border-top: 1px solid #EAEAEA;
         }
 
         .credits {
             font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            color: var(--muted-purple);
+            font-size: 1rem;
+            color: var(--primary-dark);
             max-width: 600px;
             margin: 0 auto;
+            line-height: 1.8;
         }
 
-        .credits strong {
-            color: var(--primary-dark);
+        .credits span {
+            color: var(--muted-purple);
             display: block;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2rem; }
+            .comparison-table th, .comparison-table td { padding: 15px 10px; font-size: 1rem; }
+            .tooltip-trigger .tooltip-text { width: 250px; margin-left: -125px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Flechas de navegación -->
-    <div class="scroll-nav">
-        <button id="btn-up" aria-label="Subir">&#8593;</button>
-        <button id="btn-down" aria-label="Bajar">&#8595;</button>
-    </div>
-
-    <!-- Encabezado -->
-    <header class="section-container" id="sec-1">
+    <header id="inicio">
         <div class="container">
-            <div class="reveal subtitle">Análisis Curricular Institucional</div>
-            <h1 class="reveal">Ingeniería en Inteligencia Artificial</h1>
-            <p class="reveal" style="text-align: center; color: var(--muted-purple); font-style: italic; font-size: 1.3rem;">
-                Respuestas objetivas ante la formulación de un pregrado nativo frente a la oferta de trayectorias.
-            </p>
+            <div class="subtitle reveal">Análisis de Viabilidad Institucional</div>
+            <h1 class="reveal">Ingeniería en<br>Inteligencia Artificial</h1>
+            <p class="reveal synthesis" style="border: none; padding: 0; text-align: center;">Para responder de manera rigurosa, objetiva y honesta, es fundamental cambiar la perspectiva del debate: una trayectoria no es equivalente a un pregrado.</p>
+            <a href="#seccion1" class="nav-arrow reveal">&#xFE40;</a>
         </div>
     </header>
 
-    <!-- Sección 1: Estructura vs Trayectoria -->
     <main class="container">
-        <section class="section-container" id="sec-2">
-            <h2 class="reveal">1. La Limitación de la Trayectoria</h2>
-            <div class="reveal">
-                <p>La viabilidad de crear un pregrado independiente radica en el nivel de profundidad que el mercado laboral exige. Una trayectoria representa apenas el <span class="tooltip">15% del currículo total<span class="tooltip-text">Tres cursos y un proyecto final permiten aplicar herramientas, pero no proporcionan el espacio para profundizar en la arquitectura interna de los modelos, su optimización matemática y su despliegue a gran escala.</span></span> de un estudiante.</p>
-                <p>El pregrado propuesto, por el contrario, concibe el <span class="tooltip">ecosistema algorítmico nativo<span class="tooltip-text">Los estudiantes cursan 'Aprendizaje Automático', 'Aprendizaje Profundo' y 'Aprendizaje por Refuerzo' como materias obligatorias del núcleo central, no como cursos opcionales al final de su carrera.</span></span> desde el primer semestre, abriendo espacio en semestres avanzados para una hiperespecialización que las trayectorias de otros programas no pueden alcanzar, tales como IA Generativa, Agentes Autónomos y MLOps.</p>
-            </div>
+
+        <!-- SECCIÓN 1 -->
+        <section id="seccion1">
+            <h2 class="reveal">1. La viabilidad del pregrado frente a las trayectorias</h2>
+            <p class="reveal">¿Vale la pena crear un pregrado en IA si ya existen trayectorias en otros pregrados? Sí, está justificado objetivamente, siempre y cuando el objetivo institucional sea formar especialistas nativos en IA y no generalistas con conocimientos aplicados.</p>
+            
+            <p class="reveal">La viabilidad radica en la profundidad y el 
+                <span class="tooltip-trigger">núcleo del conocimiento
+                    <span class="tooltip-text">Una trayectoria (3 cursos + proyecto) representa solo un 10% a 15% de la formación total. Permite usar herramientas, pero no profundizar en arquitecturas, matemáticas de optimización ni ética de manera simultánea.</span>
+                </span>. El plan de estudios propuesto para IA no "añade" la inteligencia artificial al final de la carrera; la construye desde el primer semestre.
+            </p>
+
+            <p class="reveal">Los estudiantes ven Aprendizaje Automático, Aprendizaje Profundo y Aprendizaje por Refuerzo como cursos obligatorios, no como opciones. Esto permite que alcancen niveles inalcanzables para otros programas en áreas como 
+                <span class="tooltip-trigger">IA Generativa y MLOps
+                    <span class="tooltip-text">MLOps (Machine Learning Operations) se refiere al despliegue a gran escala de los modelos en producción y su mantenimiento continuo.</span>
+                </span>.
+            </p>
+            <a href="#seccion2" class="nav-arrow reveal">&#xFE40;</a>
         </section>
 
-        <!-- Sección 2: Diferencias con Ingeniería de Sistemas -->
-        <section class="section-container" id="sec-3">
-            <h2 class="reveal">2. IA frente a Ingeniería de Sistemas</h2>
-            <div class="reveal">
-                <p>El Ingeniero de Sistemas diseña la infraestructura y la seguridad del software. Si toma una trayectoria en IA, adquiere la capacidad de integrar servicios inteligentes a sus desarrollos. El Ingeniero en IA asume un rol complementario pero distinto: es quien <strong>diseña, entrena y optimiza</strong> el modelo subyacente.</p>
-                
+        <!-- SECCIÓN 2 -->
+        <section id="seccion2">
+            <h2 class="reveal">2. IA vs. Ingeniería de Sistemas</h2>
+            <p class="reveal">Aunque ambos perfiles comparten el dominio de la computación y la programación, su enfoque y su relación con el software son estructuralmente distintos.</p>
+            
+            <div class="visualization reveal">
                 <table class="comparison-table">
                     <thead>
                         <tr>
-                            <th>Dimensión</th>
-                            <th>Ingeniería de Sistemas (con Trayectoria IA)</th>
-                            <th>Ingeniería en Inteligencia Artificial</th>
+                            <th>Característica</th>
+                            <th>Ingeniería de Sistemas <br><span style="font-size: 1rem; color: var(--muted-purple); font-family: 'Inter', sans-serif;">(Trayectoria IA)</span></th>
+                            <th>Ingeniería en IA <br><span style="font-size: 1rem; color: var(--vibrant-blue); font-family: 'Inter', sans-serif;">(Pregrado Nativo)</span></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><b>Fundamentación<br>Matemática</b></td>
-                            <td>Enfoque funcional. Su núcleo culmina en <span class="tooltip">Probabilidad y Estadística<span class="tooltip-text">Requiere el uso de electivas para alcanzar el nivel matemático necesario en el entrenamiento profundo de redes neuronales.</span></span>.</td>
-                            <td>Enfoque riguroso. Obligatoriedad de <span class="tooltip">Optimización Convexa<span class="tooltip-text">Esencial para comprender cómo convergen los algoritmos de aprendizaje automático, minimizando funciones de pérdida.</span></span> e Inferencia Estadística en el núcleo.</td>
+                            <td><span class="feature-label">Enfoque Principal</span></td>
+                            <td>Construcción, arquitectura, seguridad e infraestructura de sistemas de software generales.</td>
+                            <td>Construcción, entrenamiento, optimización y despliegue de modelos algorítmicos inteligentes.</td>
                         </tr>
                         <tr>
-                            <td><b>Rol en el Ciclo<br>de Vida del Software</b></td>
-                            <td>Construye el producto final (aplicación web, móvil) y gestiona la arquitectura de bases de datos tradicionales.</td>
-                            <td>Domina el ciclo <span class="tooltip">MLOps y Gobernanza<span class="tooltip-text">Desarrolla la arquitectura del modelo algorítmico, procesa los grandes volúmenes de datos y asegura que el modelo no presente sesgos.</span></span>.</td>
+                            <td><span class="feature-label">Fundamentación Matemática</span></td>
+                            <td>Funcional. Llega hasta Probabilidad/Estadística y requiere electivas para profundizar.</td>
+                            <td>Profunda. Obligatoriedad de Optimización Convexa e Inferencia Estadística, esenciales para entender cómo convergen los modelos.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="feature-label">Rol en un Proyecto</span></td>
+                            <td>Integra el modelo de IA desarrollado por otros a una aplicación web/móvil, gestiona la base de datos y asegura la red.</td>
+                            <td>Desarrolla la arquitectura del modelo, procesa grandes volúmenes de datos, entrena la red neuronal y optimiza hiperparámetros.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="feature-label">Profundidad Temática</span></td>
+                            <td>Ve la IA como un módulo (Aprendizaje de Máquina, Redes Neuronales).</td>
+                            <td>Estudia disciplinas ramificadas obligatorias: Aprendizaje Profundo, Aprendizaje por Refuerzo, y arquitecturas específicas (ej. LLMs).</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+            <p class="reveal synthesis"><b>Síntesis para el comité:</b> El Ingeniero de Sistemas construye la "casa" (la aplicación, la red) y puede instalar un "electrodoméstico inteligente". El Ingeniero en IA es quien diseña, entrena y optimiza el "cerebro" de ese electrodoméstico, asegurando que escale, no tenga sesgos y aprenda de manera eficiente.</p>
+            <a href="#seccion3" class="nav-arrow reveal">&#xFE40;</a>
         </section>
 
-        <!-- Sección 3: Diferencias con Ingeniería Matemática -->
-        <section class="section-container" id="sec-4">
-            <h2 class="reveal">3. IA frente a Ingeniería Matemática</h2>
-            <div class="reveal">
-                <p>El Ingeniero Matemático ostenta el rigor analítico para abstraer fenómenos físicos y financieros mediante ecuaciones. Sin embargo, el pregrado en IA cubre la <span class="tooltip">brecha tecnológica y computacional<span class="tooltip-text">La IA moderna requiere una sólida base en ingeniería de software, arquitectura de sistemas y nube, elementos que no son el enfoque principal de la ingeniería matemática pura.</span></span> que el matemático tradicional no aborda a nivel de infraestructura escalable.</p>
+        <!-- SECCIÓN 3 -->
+        <section id="seccion3">
+            <h2 class="reveal">3. IA vs. Ingeniería Matemática</h2>
+            <p class="reveal">El Ingeniero Matemático posee la rigurosidad analítica para entender la IA, pero el pregrado en IA cubre la brecha tecnológica que el matemático tradicional no aborda a profundidad 
+                <span class="tooltip-trigger">(Ver nota)
+                    <span class="tooltip-text">Incluso asumiendo la trayectoria de IA para Matemática, orientada al aprendizaje estadístico, la diferencia estructural y ocupacional sigue siendo muy clara.</span>
+                </span>.
+            </p>
 
+            <div class="visualization reveal">
                 <table class="comparison-table">
                     <thead>
                         <tr>
-                            <th>Dimensión</th>
-                            <th>Ingeniería Matemática (con Trayectoria IA)</th>
-                            <th>Ingeniería en Inteligencia Artificial</th>
+                            <th>Característica</th>
+                            <th>Ingeniería Matemática <br><span style="font-size: 1rem; color: var(--muted-purple); font-family: 'Inter', sans-serif;">(Trayectoria IA)</span></th>
+                            <th>Ingeniería en IA <br><span style="font-size: 1rem; color: var(--vibrant-blue); font-family: 'Inter', sans-serif;">(Pregrado Nativo)</span></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><b>Naturaleza del<br>Objeto de Estudio</b></td>
-                            <td>Orientado a fenómenos deterministas y estocásticos (requiriendo núcleo en <span class="tooltip">Física y EDPs<span class="tooltip-text">Física 1, Física 2, Análisis y Ecuaciones en Derivadas Parciales (EDPs) ocupan un espacio considerable en la malla para modelar el mundo físico.</span></span>).</td>
-                            <td>Orientado a <span class="tooltip">datos masivos no estructurados<span class="tooltip-text">Resuelve problemas complejos mediante el reconocimiento de patrones en texto (LLMs), visión artificial, sensores y percepción 3D.</span></span>.</td>
+                            <td><span class="feature-label">Enfoque Principal</span></td>
+                            <td>Modelación de fenómenos físicos, estocásticos e industriales (Física 1 y 2, EDPs, Análisis Funcional).</td>
+                            <td>Construcción de agentes computacionales autónomos y procesamiento de datos masivos.</td>
                         </tr>
                         <tr>
-                            <td><b>Despliegue<br>Computacional</b></td>
-                            <td>Formula el modelo analítico, operando habitualmente en entornos de simulación locales o repositorios científicos.</td>
-                            <td>Posee competencias de <span class="tooltip">Ingeniería y Nube<span class="tooltip-text">Cursos núcleo como 'Computación en la nube' y 'Sistemas de Aprendizaje Automático' garantizan que el profesional pueda desplegar modelos en servidores globales.</span></span>.</td>
+                            <td><span class="feature-label">Software y Datos</span></td>
+                            <td>Básica. Conocen estructuras de datos y algoritmos computacionales.</td>
+                            <td>Avanzada. Tienen en su núcleo Almacenamiento y procesamiento de grandes datos, y Computación en la Nube.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="feature-label">Despliegue y Ciclo de Vida</span></td>
+                            <td>Excelente formulando el modelo en un entorno local (ej. Python/R), con limitaciones para producción en la nube.</td>
+                            <td>Domina el ciclo MLOps. Sabe tomar un modelo matemático y desplegarlo en arquitecturas escalables.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="feature-label">Naturaleza del Problema</span></td>
+                            <td>Resuelve problemas a través de ecuaciones y simulaciones (ej. fluidos, finanzas).</td>
+                            <td>Resuelve problemas mediante reconocimiento de patrones complejos, lenguaje natural y visión artificial.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+            <p class="reveal synthesis"><b>Síntesis para el comité:</b> El Ingeniero Matemático abstrae el mundo en ecuaciones para optimizar procesos. El Ingeniero en IA toma bases de datos masivas no estructuradas y aplica ingeniería de software para construir sistemas que imiten capacidades cognitivas, con la habilidad de ponerlos a funcionar en servidores globales.</p>
+            <a href="#seccion4" class="nav-arrow reveal">&#xFE40;</a>
         </section>
+
+        <!-- SECCIÓN 4 -->
+        <section id="seccion4">
+            <h2 class="reveal">Conclusión de Viabilidad</h2>
+            <p class="reveal">La propuesta curricular estructurada es <b>altamente viable y pertinente</b>. No canibaliza a los otros programas, sino que crea un puente hiperespecializado. Toma la rigurosidad analítica y de optimización de la Ingeniería Matemática y la combina con la escalabilidad de la Ingeniería de Sistemas.</p>
+            
+            <p class="reveal">Se omiten componentes que no son centrales para la IA (como Física 2 y EDPs de Matemáticas, o Arquitectura de Computadores profunda de Sistemas) para abrir espacio al núcleo duro del <i>Machine Learning</i>, <i>Deep Learning</i> y <i>GenAI</i>.</p>
+
+            <p class="reveal synthesis" style="border-left-color: var(--vibrant-blue); color: var(--primary-dark);">Para que el comité apruebe el avance, la clave estará en evidenciar que el mercado laboral ya no demanda genéricos, sino perfiles específicos capaces de liderar la transformación algorítmica.</p>
+        </section>
+
     </main>
 
-    <!-- Footer con Créditos -->
-    <footer class="section-container" style="min-height: auto;" id="sec-5">
-        <div class="container reveal">
+    <footer class="reveal">
+        <div class="container">
             <div class="credits">
-                <strong>Área de Computación y Analítica</strong>
-                Escuela de Ciencias Aplicadas e Ingeniería<br>
-                Universidad EAFIT
+                <b>Documento de Fundamentación Curricular</b><br>
+                Área de Computación y Analítica<br>
+                Escuela de Ciencias Aplicadas e Ingeniería
+                <span>Universidad EAFIT</span>
             </div>
         </div>
     </footer>
 
     <script>
-        // Lógica de animaciones de scroll (Fade-in y Fade-out)
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15 // Se activa cuando el 15% del elemento es visible
-        };
+        // Lógica para aparecer y desaparecer contenido al hacer scroll (Dinamismo Bidireccional)
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.15 // El elemento reacciona cuando el 15% de su tamaño es visible
+            };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const element = entry.target;
-                const elementTop = entry.boundingClientRect.top;
-                
-                if (entry.isIntersecting) {
-                    // El elemento entra en pantalla
-                    element.classList.add('active');
-                    element.classList.remove('fade-up');
-                } else {
-                    // El elemento sale de la pantalla
-                    element.classList.remove('active');
-                    
-                    // Si el elemento sale por arriba de la pantalla, aplica fade-up
-                    if (elementTop < 0) {
-                        element.classList.add('fade-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Aparece cuando entra en pantalla
+                        entry.target.classList.add("active");
+                    } else {
+                        // Desaparece cuando sale de la pantalla
+                        entry.target.classList.remove("active");
                     }
-                }
-            });
-        }, observerOptions);
+                });
+            }, observerOptions);
 
-        document.querySelectorAll('.reveal').forEach((element) => {
-            observer.observe(element);
-        });
-
-        // Lógica de navegación mediante flechas flotantes
-        const sections = Array.from(document.querySelectorAll('.section-container'));
-        const btnUp = document.getElementById('btn-up');
-        const btnDown = document.getElementById('btn-down');
-
-        function getCurrentSectionIndex() {
-            let currentIndex = 0;
-            let minDistance = Infinity;
-            
-            sections.forEach((section, index) => {
-                const rect = section.getBoundingClientRect();
-                const distance = Math.abs(rect.top);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    currentIndex = index;
-                }
-            });
-            return currentIndex;
-        }
-
-        btnUp.addEventListener('click', () => {
-            const index = getCurrentSectionIndex();
-            if (index > 0) {
-                sections[index - 1].scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-
-        btnDown.addEventListener('click', () => {
-            const index = getCurrentSectionIndex();
-            if (index < sections.length - 1) {
-                sections[index + 1].scrollIntoView({ behavior: 'smooth' });
-            }
+            const reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(el => observer.observe(el));
         });
     </script>
 </body>
